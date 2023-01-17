@@ -1,0 +1,97 @@
+group 'com.quickblox.quickblox_sdk'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url "https://github.com/QuickBlox/quickblox-android-sdk-releases/raw/master/"
+        }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.2.2'
+    }
+}
+
+ext {
+    // quickblox SDK version
+    qbSdkVersion = '4.0.0'
+
+    // tests
+    testRunnerAndroidXVersion = '1.3.0'
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url "https://github.com/QuickBlox/quickblox-android-sdk-releases/raw/master/"
+        }
+    }
+}
+
+apply plugin: 'com.android.library'
+
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
+project.ext {
+    compileSdkVersion = 33
+    buildToolsVersion = "31.0.0"
+
+    minSdkVersion = 21
+    targetSdkVersion = 31
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    lintAbortOnError = false
+}
+
+android {
+    compileSdkVersion safeExtGet('compileSdkVersion', project.ext.compileSdkVersion)
+    buildToolsVersion safeExtGet('buildToolsVersion', project.ext.buildToolsVersion)
+
+    defaultConfig {
+        minSdkVersion 21
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
+    maven {
+        url "https://github.com/QuickBlox/quickblox-android-sdk-releases/raw/master/"
+    }
+}
+
+dependencies {
+    // quickblox
+    implementation("com.quickblox:quickblox-android-sdk-messages:$project.qbSdkVersion")
+    implementation("com.quickblox:quickblox-android-sdk-chat:$project.qbSdkVersion")
+    implementation("com.quickblox:quickblox-android-sdk-content:$project.qbSdkVersion")
+    implementation("com.quickblox:quickblox-android-sdk-customobjects:$project.qbSdkVersion")
+    implementation("com.quickblox:quickblox-android-sdk-videochat-webrtc:$project.qbSdkVersion")
+    implementation "com.quickblox:quickblox-android-sdk-conference:$qbSdkVersion"
+
+    // tests
+    androidTestImplementation "androidx.test:runner:$project.testRunnerAndroidXVersion"
+}

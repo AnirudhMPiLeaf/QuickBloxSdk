@@ -1,0 +1,27 @@
+<resources>
+    //Call
+    <string name="notification_title_call">Calling…</string>
+    <string name="notification_text_call">Touch takes you back to the call %1$s</string>
+
+    //Incoming
+    <string name="notification_title_incoming">You have incoming call</string>
+    <string name="notification_text_incoming">Incoming call from %1$s</string>
+
+    //Outgoing
+    <string name="notification_title_outgoing">You have outgoing call</string>
+    <string name="notification_text_outgoing">Outgoing call to %1$s</string>
+
+    <!--Commons-->
+    <string name="app_name">Flutter Quickblox</string>
+    <string name="conference">Flutter Conference</string>
+    <string name="webrtc">Flutter WebRTC</string>
+    <string name="call_time_format">%%0%dd</string>
+
+    <!--WebRTC Call Service-->
+    <string name="webrtc_call_service_notification_title">The call service is ready</string>
+    <string name="webrtc_call_service_notification_text">Quickblox</string>
+
+    <!--Conference Call Service-->
+    <string name="conference_call_service_notification_title">The call service is ready</string>
+    <string name="conference_call_service_notification_text">Quickblox</string>
+</resources>
